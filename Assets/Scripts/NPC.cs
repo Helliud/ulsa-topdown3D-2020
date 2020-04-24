@@ -5,11 +5,21 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
     [SerializeField]
-    GameObject npcTextBox;
+    DialogTextBox npcTextBox;
+    [SerializeField, TextArea(3, 5)]
+    string npcDialog;
 
     public void StarTalking()
     {
-        npcTextBox.SetActive(true);
+        npcTextBox.gameObject.SetActive(true);
+        npcTextBox.Message = npcDialog;
+        npcTextBox.ShowDialog();
+    }
+
+    public void StopTalking()
+    {
+        npcTextBox.gameObject.SetActive(false);
+        npcTextBox.ClearText();
     }
 
     /// <summary>
@@ -21,6 +31,14 @@ public class NPC : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             StarTalking();
+        }
+    }
+
+    private void OnTriggerExit(Collider other) 
+    {
+        if(other.CompareTag("Player"))
+        {
+            StopTalking();
         }
     }
 }
