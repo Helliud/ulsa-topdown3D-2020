@@ -9,13 +9,18 @@ public class Enemy : MonoBehaviour
 
     [SerializeField, Range(0f, 10f)]
     float minDistance;
+    UnityEngine.AI.NavMeshAgent navMeshAgent;
 
+    void Awake() {
+        navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+    }
 
     void Update()
     {
         if(Attack)
         {
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            navMeshAgent.destination = GameManager.instance.Player.transform.position;
+            //transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
             transform.LookAt(GameManager.instance.Player.transform);
         }
     }
