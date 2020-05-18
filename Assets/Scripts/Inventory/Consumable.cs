@@ -6,6 +6,6 @@ public class Consumable : Item
 {
     public virtual void Drink()
     {
-        Debug.Log("Drinking object");
+        Debug.Log(name + " Consumed");
     }
 }

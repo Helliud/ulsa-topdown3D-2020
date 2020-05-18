@@ -1,42 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPC : MonoBehaviour
 {
     [SerializeField]
-    DialogTextBox npcTextBox;
-    [SerializeField, TextArea(3, 5)]
-    string npcDialog;
+    TextBoxDialogue textBoxDialogue;
 
-    public void StarTalking()
+    [SerializeField, TextArea(3, 5)]
+    string npcDialogue;
+
+    public void StartTalking()
     {
-        npcTextBox.gameObject.SetActive(true);
-        npcTextBox.Message = npcDialog;
-        npcTextBox.ShowDialog();
+        textBoxDialogue.gameObject.SetActive(true);
+        textBoxDialogue.Message = npcDialogue;
+        textBoxDialogue.ShowDialogue();
     }
 
     public void StopTalking()
     {
-        npcTextBox.gameObject.SetActive(false);
-        npcTextBox.ClearText();
+        textBoxDialogue.gameObject.SetActive(false);
+        textBoxDialogue.ClearText();
     }
-
-    /// <summary>
-    /// OnTriggerEnter is called when the Collider other enters the trigger.
-    /// </summary>
-    /// <param name="other">The other Collider involved in this collision.</param>
-    void OnTriggerEnter(Collider other)
+    
+    void OnTriggerEnter(Collider col)
     {
-        if(other.CompareTag("Player"))
+        if( col.CompareTag("Player") )
         {
-            StarTalking();
+            StartTalking();
         }
     }
 
-    private void OnTriggerExit(Collider other) 
+     void OnTriggerExit(Collider col)
     {
-        if(other.CompareTag("Player"))
+        if(col.CompareTag("Player"))
         {
             StopTalking();
         }

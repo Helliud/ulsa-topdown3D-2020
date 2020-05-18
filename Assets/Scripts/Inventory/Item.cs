@@ -6,12 +6,10 @@ public class Item : ScriptableObject
 {
     [SerializeField]
     Sprite icon;
-
+    
     [SerializeField]
-    protected string objectName = "Potion";
+    protected string objectName;
 
     [SerializeField, TextArea(3, 10)]
-    protected string description;
-
+    string description;
 }
-
